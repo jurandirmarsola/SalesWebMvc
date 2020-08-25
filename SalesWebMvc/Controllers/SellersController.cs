@@ -28,7 +28,7 @@ namespace SalesWebMvc.Controllers
             return View(list);
         }
 
-        public async Task<IActionResult> CreateAsync()
+        public async Task<IActionResult> Create()
         {
             var departments = await _departmentService.FindAllAsync();
             var viewModel = new SellerFormViewModel { Departments = departments };
@@ -49,7 +49,7 @@ namespace SalesWebMvc.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        public async Task<IActionResult> DeleteAsync(int? id)
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
                 return RedirectToAction(nameof(Error),new { message="id not provided"});
@@ -62,13 +62,13 @@ namespace SalesWebMvc.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteAsync(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             await _sellerService.RemoveAsync(id);
             return RedirectToAction(nameof(Index));
         }
 
-        public async Task<IActionResult> DetailsAsync(int? id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
                 return RedirectToAction(nameof(Error), new { message = "Id not provided" });
